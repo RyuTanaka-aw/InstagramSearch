@@ -7,7 +7,7 @@ const url = `https://graph.facebook.com/v13.0/${instaBusinessId}/media?fields=id
 // 投稿データを取得
 async function getPostData(url, newData = []) {
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, { next: { revalidate: 0 } });
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -40,4 +40,8 @@ export default async function Home() {
       <Main postData={postData} />
     </div>
   );
+}
+
+export const metadata = {
+  title: 'Instagram App',
 }
