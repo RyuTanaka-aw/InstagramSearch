@@ -10,7 +10,9 @@ export default function Main({ postData }) {
     setText(newValue);
   }
 
-  const filteredData = postData.filter(item => item.caption.includes(text));
+  const hashtags = text.split(/[\s\u3000]+/).map(tag => tag.trim());
+  const filteredData = postData.filter(item => 
+    item.caption && hashtags.every(tag => item.caption.includes(`${tag}`)));
   
   return (
     <div>
